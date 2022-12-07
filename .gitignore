@@ -138,3 +138,5 @@ cython_debug/
 
 # Custom
 .idea
+*.mp3
+*.mp4
