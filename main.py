@@ -36,5 +36,5 @@ class VideoRemover:
         print(opening_offset, ending_offset)
 
 
-aa = VideoRemover("naruto1.mp4", "opening.mp3", "")
+aa = VideoRemover("naruto1.mp4", "opening.mp3", "ending.mp3")
 aa.parse_video_file()
