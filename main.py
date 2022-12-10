@@ -1,7 +1,10 @@
+from moviepy.audio.io.AudioFileClip import AudioFileClip
 from moviepy.editor import VideoFileClip
+import moviepy
 import numpy
 import librosa
 from scipy import signal
+from soundfile import SoundFile
 
 
 class VideoRemover:
@@ -14,8 +17,9 @@ class VideoRemover:
         self.ending_path = ending_path
 
     def mp4_to_mp3(self):
-        video = VideoFileClip(self.video_file_path)
-        video.audio.write_audiofile(self.parsed_video_file_path, bitrate=self.VIDEO_BITRATE)
+        # TODO Temporary solution - need to extract sound without creating .mp3 file
+        with VideoFileClip(self.video_file_path) as video:
+            video.audio.write_audiofile(self.parsed_video_file_path, bitrate=self.VIDEO_BITRATE)
 
     def librosa_load(self, filename, sampling_rate=None):
         return librosa.load(filename, sr=sampling_rate)
@@ -30,11 +34,15 @@ class VideoRemover:
         opening_offset, ending_offset = None, None
         # self.mp4_to_mp3()
         y_movie, sampling_rate_movie = self.librosa_load(self.parsed_video_file_path)
-        if self.opening_path:
-            opening_offset = self.calculate_offset(self.opening_path, y_movie, sampling_rate_movie)
+        print(y_movie)
+        print(type(y_movie))
+        print(sampling_rate_movie)
+        # if self.opening_path:
+        #     opening_offset = self.calculate_offset(self.opening_path, y_movie, sampling_rate_movie)
+        #
+        # print(opening_offset, ending_offset)
 
-        print(opening_offset, ending_offset)
 
-
-aa = VideoRemover("naruto1.mp4", "opening.mp3", "ending.mp3")
-aa.parse_video_file()
+# aa = VideoRemover("naruto1.mp4", "opening.mp3", "")
+# aa.parse_video_file()
+# # aa.mp4_to_mp3()
