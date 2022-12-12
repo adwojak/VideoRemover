@@ -40,6 +40,7 @@ class VideoRemover:
         return opening_offset, ending_offset
 
     def write_video_file(self, opening_offset, ending_offset):
+        # Subclipping and merging files
         with VideoFileClip(self.video_file_path) as video:
             video = video.cutout(opening_offset[0], opening_offset[1])
             # TODO Error with get_frame for cutted video
