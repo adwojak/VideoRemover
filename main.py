@@ -85,7 +85,8 @@ class VideoModel(BaseModel):
 
 
 class SettingsModel(BaseModel):
-    ...
+    processes: int | None
+    output_directory: str | None
 
 
 @dataclass
@@ -107,7 +108,10 @@ class VideoRemover:
 
 
 dict_data = {
-    "settings": {},
+    "settings": {
+        "processes": 1,
+        "output_directory": "parsed"
+    },
     "videos": [
         {
             "video_name": "naruto1.mp4",
